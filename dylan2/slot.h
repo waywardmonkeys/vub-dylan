@@ -10,33 +10,33 @@ class Slot_specs
    private :
       slot_adjectives  adjective ;
       slot_allocation  allocation ;
-      char *getter_name ;
-      char *setter_name ;
+      const char *getter_name ;
+      const char *setter_name ;
       DylanObject *slot_type ;
-      char *init_keyword ;
-      char *req_init_keyword ;
+      const char *init_keyword ;
+      const char *req_init_keyword ;
       DylanObject *init ;
       DylanObject *init_function ;
    public :
       Slot_specs( slot_adjectives AnAdjective,
                   slot_allocation AnAllocation,
-                  char *getter,
+                  const char *getter,
                   DylanObject *Ptr , 
                   List<Property *> *Properties ) ;
       Slot_specs( slot_adjectives AnAdjective,
                   slot_allocation AnAllocation,
-                  char *getter,
+                  const char *getter,
                   DylanObject *Ptr , 
                   DylanObject *Init,
-                  char *keyw,
-                  char *reqkeyw ) ;
-     char *GetGetterName() { return getter_name ; }
-     char *GetSetterName() { return setter_name ; }
+                  const char *keyw,
+                  const char *reqkeyw ) ;
+     const char *GetGetterName() { return getter_name ; }
+     const char *GetSetterName() { return setter_name ; }
      DylanObject *GetType() { return slot_type ; }
      DylanObject *GetValue() { return init ; }
      void SetValue(DylanObject *o) { init = o ; }
-     char *GetInitKeyword() { return init_keyword ; }
-     char *GetReqInitKeyword() { return req_init_keyword ; }
+     const char *GetInitKeyword() { return init_keyword ; }
+     const char *GetReqInitKeyword() { return req_init_keyword ; }
      DylanObject *GetInitFunction() { return init_function ; }
      slot_adjectives GetSlotAdjective() { return adjective ; }
      slot_allocation GetSlotAllocation() { return allocation ; }

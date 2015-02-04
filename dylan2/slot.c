@@ -8,7 +8,7 @@
  | INPUT     : slot_adjective : het slot adjectief (open, sealed, ..)
  |             slot_allocation : de storage allocatie (virtual,
  |                               inherited , constant )
- |             char * : naam van de getter
+ |             const char * : naam van de getter
  |             DylanObject : type van het slot
  |             List<Property *> : een lijst van properties
  | OUTPUT    : -
@@ -22,7 +22,7 @@
  */
 Slot_specs::Slot_specs( slot_adjectives AnAdjective,
                          slot_allocation AnAllocation,
-                         char *getter,
+                         const char *getter,
                          DylanObject *Ptr , 
                          List<Property *> *Properties) 
 {
@@ -33,9 +33,11 @@ Slot_specs::Slot_specs( slot_adjectives AnAdjective,
   adjective = AnAdjective ;
   allocation = AnAllocation ;
   getter_name = getter ;
+  setter_name = NULL;
   strcpy(s, getter) ;
   strcat(s, ":" );
   init_keyword = s ;
+  req_init_keyword = NULL;
   slot_type = Ptr;
   for( i = 1; Properties != NULL && i<= Properties->GetSize(); i++ )
   {
@@ -85,18 +87,19 @@ Slot_specs::Slot_specs( slot_adjectives AnAdjective,
  */
 Slot_specs::Slot_specs( slot_adjectives AnAdjective,
                         slot_allocation AnAllocation,
-                        char *getter,
+                        const char *getter,
                         DylanObject *Ptr , 
                         DylanObject *Init, 
-                        char *keyw,
-                        char *reqkeyw ) 
+                        const char *keyw,
+                        const char *reqkeyw )
 {
   adjective = AnAdjective ;
   allocation = AnAllocation ;
   getter_name = getter ;
+  setter_name = NULL;
   slot_type = Ptr;
   init = Init ;
   init_keyword = keyw ;
   req_init_keyword = reqkeyw ;
-} 
+}
 
