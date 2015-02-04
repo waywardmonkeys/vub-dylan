@@ -1,0 +1,6 @@
+*.o
+dylan2/y.tab.c
+dylan2/lex.yy.c
+*.a
+dylan2/dylan
+dylan2/dylan.dSYM
