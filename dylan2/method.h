@@ -23,39 +23,39 @@ class Parameter : public Variable
 {
     private :
       parameter_types Type ;
-      char *name ;
-      char *keyword ;
+      const char *name ;
+      const char *keyword ;
       Expression *e ;
 
     public :
       Parameter( parameter_types t ,
-                 char *s ,
+                 const char *s ,
                  Expression *c ) : Variable( s,c )
         { Type = t; name = s; e = c ; keyword = NULL ; }
 
       Parameter( parameter_types t ,
-                 char *s ,
+                 const char *s ,
                  Expression *c,
-                 char *k ) : Variable(s,c)
+                 const char *k ) : Variable(s,c)
         { Type = t; name = s; e = NULL ; keyword = NULL ; }
       Parameter( parameter_types t ,
-                 char *s ,
-                 char *c,
+                 const char *s ,
+                 const char *c,
                  Expression *k ) : Variable(s)
         { Type = t; name = s; e = k ; keyword = c ; }
-      Parameter( char *s ,
+      Parameter( const char *s ,
                  Expression *k ) : Variable(s)
         { Type = normal; name = s; e = k ; keyword = NULL ; }
       void Print(int *) {} ;
       parameter_types ParaType() { return Type ; } 
-      char *GetKeyword() { return keyword ; } 
+      const char *GetKeyword() { return keyword ; } 
       Expression *GetSingleton() { return e ; }
 } ;
 
 class Method : public Expression
 {
    private:
-      char *Name ;
+      const char *Name ;
       method_adjectives   MethodAdj ;
       Body  *MethodBody ;
       List<Parameter *> *Parameters ;
@@ -66,25 +66,27 @@ class Method : public Expression
       Method( List<Parameter *> *p ,
               List<Variable *> *v ,
               Body *b )
-         { Parameters = p ; VarList = v ; MethodBody = b ; }
+         { Name = NULL; Parameters = p ; VarList = v ; MethodBody = b ; }
       Method( List<Parameter *> *p ,
               Variable *v ,
               Body *b )
-         { Parameters = p ; 
+         { Name = NULL ;
+           Parameters = p ;
            VarList = new List<Variable *> ; 
            VarList->AppendItem(v) ;
            MethodBody = b ; }
 
       Method( List<Parameter *> *p ,
               List<Variable *> *v  )
-         { Parameters = p ; VarList = v ; MethodBody = NULL ; }
+         { Name = NULL; Parameters = p ; VarList = v ; MethodBody = NULL ; }
       Method( List<Parameter *> *p ,
               Variable *v )
-         { Parameters = p ; 
+         { Name = NULL ;
+           Parameters = p ;
            VarList = new List<Variable *> ; 
            VarList->AppendItem(v) ;
            MethodBody = NULL ; }
-      Method ( char *s ,
+      Method ( const char *s ,
                List<Parameter *> *p,
                PRIM g )
              { Name = s ;
@@ -92,8 +94,8 @@ class Method : public Expression
                MethodAdj = none ;
                VarList = NULL ;
                prim = g ; } 
-      char *GetName() ;
-      void SetName(char *s ) { Name = s ; } ;
+      const char *GetName() ;
+      void SetName(const char *s ) { Name = s ; } ;
       void SetMethodAdj( method_adjectives adj ) { MethodAdj = adj ; }
       void Print(int *) ;
       PRIM Primitive() { return prim ; }
@@ -129,7 +131,7 @@ class MethodDictionnary
 
         struct MethodDict
         {
-            char    Name[255] ;
+            char Name[255] ;
             MethodStruct *Meth ;
             MethodDict *next ;
         } ;
@@ -147,7 +149,7 @@ class MethodDictionnary
       void  SaveState() ;
       void  RestoreState() ;
 
-      Boolean   SearchMethod( char *Name,
+      Boolean   SearchMethod( const char *Name,
                               List<DylanObject *> *,
                               List<DylanObject *> *,
                               List<DylanObject *> *,

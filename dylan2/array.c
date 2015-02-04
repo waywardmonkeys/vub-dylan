@@ -1,5 +1,7 @@
 #include "array.h"
 #include "keyword.h"
+#include <string.h>
+
 /*
  +------------------------------------------------------------------
  | FUNCTION  : array()

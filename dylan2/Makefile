@@ -1,6 +1,6 @@
 # makefile voor de dylan programmeer taal 
 # datum : 15/08/1994
-CC=g++ -O6 -m486
+CC=g++ -x c++ -O2 -g
 CCLIBS= -ldylan -lgc -lm 
 LEX=flex
 YACC=yacc -t
@@ -49,11 +49,8 @@ lex.yy.c : dylan.lex
 y.tab.c : dylan.yacc lex.yy.c 
 	$(YACC) dylan.yacc
 
-dylan.o : y.tab.c dylan.c object.h
-	$(CC) -c dylan.c
-
-dylan : dylan.o libdylan.a gc/libgc.a
-	$(CC) dylan.o -o dylan -L. -Lgc  $(CCLIBS)
+dylan : y.tab.c dylan.c object.h libdylan.a
+	$(CC) dylan.c -o dylan -L. $(CCLIBS)
 
 libdylan.a : $(OBJS) list.h
 	ar -ru libdylan.a $(OBJS)

@@ -11,10 +11,11 @@
 #include "types.h"
 #include "variable.h"
 #include "rest_list.h"
+#include <string.h>
 /*
  +------------------------------------------------------------------
  | FUNCTION  : Variable::Variable
- | INPUT     : char       : naam van de variable
+ | INPUT     : const char : naam van de variable
  |             int        : index binnen de variable
  |             Expression : type van de variable
  |             Expression : initiële waarde van de variable
@@ -28,7 +29,7 @@
  | CHANGES   :
  +------------------------------------------------------------------
  */
-Variable::Variable (char *a,
+Variable::Variable (const char *a,
                     int c, 
                     Expression *d, 
                     Expression *e, 
@@ -44,8 +45,8 @@ Variable::Variable (char *a,
 /*
  +------------------------------------------------------------------
  | FUNCTION  : Variable::Variable
- | INPUT     : char  : naam van de variable
- |             int   : index van de variable
+ | INPUT     : const char : naam van de variable
+ |             int        : index van de variable
  | OUTPUT    : -
  | RETURN    : variable object
  | DATE      :
@@ -55,7 +56,7 @@ Variable::Variable (char *a,
  | CHANGES   :
  +------------------------------------------------------------------
  */
-Variable::Variable (char *a,
+Variable::Variable (const char *a,
                     int c )
 { 
    Name     = a ;
@@ -70,7 +71,7 @@ Variable::Variable (char *a,
 /*
  +------------------------------------------------------------------
  | FUNCTION  : Variable::Variable
- | INPUT     : char  : naam van de variable
+ | INPUT     : const char : naam van de variable
  | OUTPUT    : -
  | RETURN    : variable object
  | DATE      :
@@ -80,7 +81,7 @@ Variable::Variable (char *a,
  | CHANGES   :
  +------------------------------------------------------------------
  */
-Variable::Variable(char *a)
+Variable::Variable(const char *a)
 { 
    Name     = a ;
    index    = -1 ;
@@ -91,7 +92,7 @@ Variable::Variable(char *a)
 /*
  +------------------------------------------------------------------
  | FUNCTION  : Variable::Variable
- | INPUT     : char       : naam van de variable
+ | INPUT     : const char : naam van de variable
  |             Expression : type van de variable
  | OUTPUT    : -
  | RETURN    : variable object
@@ -102,7 +103,7 @@ Variable::Variable(char *a)
  | CHANGES   :
  +------------------------------------------------------------------
  */
-Variable::Variable(char *a, Expression *d)
+Variable::Variable(const char *a, Expression *d)
 { 
    Name        = a ;
    index       = -1 ;
@@ -146,7 +147,7 @@ Expression *Variable::GetType()
  | CHANGES   :
  +------------------------------------------------------------------
  */
-char *Variable::GetName() 
+const char *Variable::GetName() 
 { 
    return Name ;
 }

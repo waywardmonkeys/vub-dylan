@@ -20,4 +20,4 @@ struct Property
     Expression *value ;
     void Print(int *) {} ;
 } ;
-#endif _PROPERTY
+#endif /* _PROPERTY */

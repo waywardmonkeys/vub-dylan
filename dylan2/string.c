@@ -1,6 +1,7 @@
 #include "string.h"
 #include "character.h"
 #include "keyword.h"
+#include <string.h>
 
 /*
  +------------------------------------------------------------------
@@ -18,7 +19,7 @@
 string::string() 
 { 
    id = "<string>"; 
-   s = "" ;
+   s = strdup("") ;
    Abstract = FALSE ; 
    Sealed = TRUE; 
    Instantiable = TRUE ; 
@@ -30,7 +31,7 @@ string::string()
 /*
  +------------------------------------------------------------------
  | FUNCTION  : string::string
- | INPUT     : char * : een string
+ | INPUT     : const char * : een string
  | OUTPUT    : -
  | RETURN    : een string object
  | DATE      :
@@ -41,9 +42,10 @@ string::string()
  | CHANGES   :
  +------------------------------------------------------------------
  */
-string::string(char *str) 
+string::string(const char *str) 
 { 
-   s = str ;
+   // XXX
+   s = strdup(str) ;
    id = "<string>"; 
    Abstract = FALSE ; 
    Sealed = TRUE; 
@@ -56,7 +58,7 @@ string::string(char *str)
 /*
  +------------------------------------------------------------------
  | FUNCTION  : string::Setter
- | INPUT     : char * : een string
+ | INPUT     : const char * : een string
  | OUTPUT    : -
  | RETURN    : -
  | DATE      :
@@ -66,9 +68,9 @@ string::string(char *str)
  | CHANGES   :
  +------------------------------------------------------------------
  */
-void string::Setter(char *str) 
+void string::Setter(const char *str) 
 { 
-   s = str ; 
+   s = strdup(str) ; 
 }
 
 /*

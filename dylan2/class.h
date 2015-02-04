@@ -61,7 +61,7 @@ class ClassDictionnary
       ClassDictionnary() ;     
       void InsertClass( DylanObject *C) ;
       DylanObject *GetClass() ;
-      int   SearchClass( char *Name ) ;
+      int   SearchClass( const char *Name ) ;
       void Dump() ;
 } ;
 #endif

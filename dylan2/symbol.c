@@ -1,4 +1,5 @@
 #include "symbol.h"
+#include <string.h>
 
 /*
  +------------------------------------------------------------------
@@ -28,7 +29,7 @@ symbol::symbol()
 /*
  +------------------------------------------------------------------
  | FUNCTION  : symbol::symbol
- | INPUT     : char * : een symbool
+ | INPUT     : const char * : een symbool
  | OUTPUT    : -
  | RETURN    : symbol object
  | DATE      :
@@ -38,7 +39,7 @@ symbol::symbol()
  | CHANGES   :
  +------------------------------------------------------------------
  */
-symbol::symbol(char *str)
+symbol::symbol(const char *str)
 { 
    s = str ;
    id = "<symbol>"; 
@@ -53,7 +54,7 @@ symbol::symbol(char *str)
 /*
  +------------------------------------------------------------------
  | FUNCTION  : symbol::Setter
- | INPUT     : char * : een symbool
+ | INPUT     : const char * : een symbool
  | OUTPUT    : -
  | RETURN    : -
  | DATE      :
@@ -63,7 +64,7 @@ symbol::symbol(char *str)
  | CHANGES   :
  +------------------------------------------------------------------
 */
-void symbol::Setter(char *str)
+void symbol::Setter(const char *str)
 { 
    s = str ;
 }

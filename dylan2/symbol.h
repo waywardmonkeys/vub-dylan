@@ -5,13 +5,13 @@
 class symbol : public DylanObject
 {
    private :
-      char *s ;
+      const char *s ;
    public :
      /* constructors */
      symbol() ;
-     symbol(char *str) ; 
+     symbol(const char *str) ; 
 
-     void Setter(char *str) ;
+     void Setter(const char *str) ;
      void Getter(char *str) ;
      void Print(int *) ;
 } ;

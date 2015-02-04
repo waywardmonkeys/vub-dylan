@@ -434,7 +434,7 @@ void For::Print(int *indent )
  */
 DylanObject *If::GetValue( Environment *Env )
 {
-    Boolean bool ;
+    Boolean boolean ;
     DylanObject *Cond ;
     Body *Local ;
     Environment *NewEnv ;
@@ -442,9 +442,9 @@ DylanObject *If::GetValue( Environment *Env )
     NewEnv = new Environment( Env ) ;
 
     Cond = Condition->GetValue(Env) ; // evaluatie van de conditie
-    Cond->Getter(&bool) ;
+    Cond->Getter(&boolean) ;
 
-    if(bool) 
+    if(boolean) 
     {
        // then clause evalueren
 
@@ -476,21 +476,21 @@ DylanObject *If::GetValue( Environment *Env )
  */
 DylanObject * While::GetValue( Environment *Env )
 {
-    Boolean bool ;
+    Boolean boolean ;
     static DylanObject  *Result ;
     DylanObject *Cond ;
     Environment *NewEnv ;
 
     NewEnv = new Environment(Env) ;
     Cond = Condition->GetValue(Env) ;
-    Cond->Getter(&bool) ;
+    Cond->Getter(&boolean) ;
     Result = NULL ;
 
-    while(bool) 
+    while(boolean) 
     {
        Result = While_body->GetValue(NewEnv) ;
        Cond = Condition->GetValue(Env) ;
-       Cond->Getter(&bool) ;
+       Cond->Getter(&boolean) ;
     }
     return Result ;
 }
@@ -510,20 +510,20 @@ DylanObject * While::GetValue( Environment *Env )
  */
 DylanObject * Until::GetValue( Environment *Env )
 {
-    Boolean bool ;
+    Boolean boolean ;
     static DylanObject  *Result ;
     DylanObject *Cond ;
     Environment *NewEnv ;
 
     NewEnv = new Environment(Env) ;
     Cond = Condition->GetValue(Env) ;
-    Cond->Getter(&bool) ;
+    Cond->Getter(&boolean) ;
 
-    while(! bool) 
+    while(! boolean) 
     {
        Result = Until_body->GetValue(NewEnv) ;
        Cond = Condition->GetValue(Env) ;
-       Cond->Getter(&bool) ;
+       Cond->Getter(&boolean) ;
     }
     return Result ;
 }
@@ -543,7 +543,7 @@ DylanObject * Until::GetValue( Environment *Env )
  */
 DylanObject * Unless::GetValue( Environment *Env )
 {
-    Boolean bool ;
+    Boolean boolean ;
     static DylanObject  *Result ;
     DylanObject *Cond ;
     Environment *NewEnv ;
@@ -551,12 +551,12 @@ DylanObject * Unless::GetValue( Environment *Env )
     NewEnv = new Environment(Env) ;
 
     Cond = Condition->GetValue(Env) ;
-    Cond->Getter(&bool) ;
+    Cond->Getter(&boolean) ;
 
 
     Result = NULL ;
 
-    if(! bool) 
+    if(! boolean) 
     {
        Result = Unless_body->GetValue(NewEnv) ;
     }
@@ -602,7 +602,7 @@ DylanObject * Case::GetValue( Environment *Env )
    int i ;
    DylanObject *Result ;
    Environment *NewEnv ;
-   Boolean bool;
+   Boolean boolean;
 
    NewEnv = new Environment(Env) ;
 
@@ -615,15 +615,15 @@ DylanObject * Case::GetValue( Environment *Env )
       if ( Tests->GetItem() != NULL )
       {
          Result = Tests->GetItem()->GetValue(Env) ;
-         Result->Getter(&bool) ;
+         Result->Getter(&boolean) ;
       }
       else
       {
          // indien geen test = otherwise
-         bool = TRUE ;
+         boolean = TRUE ;
       }
 
-      if ( bool )
+      if ( boolean )
       {
          Bodies->MoveTo(i) ;
          return Bodies->GetItem()->GetValue(NewEnv) ;
@@ -738,7 +738,7 @@ Boolean To::CheckBound( Environment *Env, DylanObject *Obj )
    symbol *op ;
    DylanObject *Arg[10] ;
    List<DylanObject *> *P ;
-   Boolean bool ;
+   Boolean boolean ;
 
    op = new symbol(">") ;
    P = new List<DylanObject *> ;
@@ -747,8 +747,8 @@ Boolean To::CheckBound( Environment *Env, DylanObject *Obj )
    P->AppendItem(Arg[1]) ;
    Arg[2] = this->GetValue(Env) ;
    P->AppendItem(Arg[2]) ;
-   apply( op, Env, P, Arg, NULL )->Getter(&bool) ;
-   return bool ;
+   apply( op, Env, P, Arg, NULL )->Getter(&boolean) ;
+   return boolean ;
 }
 
 /*
@@ -771,7 +771,7 @@ Boolean Above::CheckBound( Environment *Env, DylanObject *Obj )
    symbol *op ;
    DylanObject *Arg[10] ;
    List<DylanObject *> *P ;
-   Boolean bool ;
+   Boolean boolean ;
 
    op = new symbol("<=") ;
    P = new List<DylanObject *> ;
@@ -780,7 +780,8 @@ Boolean Above::CheckBound( Environment *Env, DylanObject *Obj )
    P->AppendItem(Arg[1]) ;
    Arg[2] = this->GetValue(Env) ;
    P->AppendItem(Arg[2]) ;
-   apply( op, Env, P, Arg, NULL )->Getter(&bool) ;
+   apply( op, Env, P, Arg, NULL )->Getter(&boolean) ;
+   return boolean;
  }
 
 /*
@@ -803,7 +804,7 @@ Boolean Below::CheckBound( Environment *Env, DylanObject *Obj )
    symbol *op ;
    DylanObject *Arg[10] ;
    List<DylanObject *> *P ;
-   Boolean bool ;
+   Boolean boolean ;
 
    op = new symbol(">=") ;
    P = new List<DylanObject *> ;
@@ -812,7 +813,8 @@ Boolean Below::CheckBound( Environment *Env, DylanObject *Obj )
    P->AppendItem(Arg[1]) ;
    Arg[2] = this->GetValue(Env) ;
    P->AppendItem(Arg[2]) ;
-   apply( op, Env, P, Arg, NULL )->Getter(&bool) ;
+   apply( op, Env, P, Arg, NULL )->Getter(&boolean) ;
+   return boolean;
  }
 
 /*
@@ -960,31 +962,31 @@ DylanObject * Collection_clause::GetValue( Environment *Env )
 DylanObject * For::GetValue( Environment *Env )
 {
    int i ;
-   Boolean bool ;
+   Boolean boolean ;
    Boolean b ;
    Environment *NewEnv ;
 
    NewEnv = new Environment(Env) ;
 
-   bool = TRUE ;
+   boolean = TRUE ;
 
-   while( bool ) 
+   while( boolean ) 
    {
      for( i = 1; i <= Clauses->GetSize(); i++ )
      {
         Clauses->MoveTo(i) ;
         Clauses->GetItem()->GetValue(NewEnv)->Getter(&b) ;
-        if (b) bool = FALSE ;
+        if (b) boolean = FALSE ;
      }
 
      if ( EndTest != NULL )
      {
          EndTest->GetValue(NewEnv)->Getter(&b) ;
-         if ( b && TypeTest == until_test ) bool = FALSE ;
-         if ( ! b && TypeTest == while_test ) bool = FALSE ;
+         if ( b && TypeTest == until_test ) boolean = FALSE ;
+         if ( ! b && TypeTest == while_test ) boolean = FALSE ;
 
      }
-     if ( bool )
+     if ( boolean )
      {
         if ( ForBody != NULL ) ForBody->GetValue(NewEnv) ;
      }

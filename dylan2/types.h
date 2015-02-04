@@ -9,7 +9,7 @@
  | CHANGES   :
  +------------------------------------------------------------------
 */
-#include "gc/include/gc_c++.h"
+#include <gc/gc_cpp.h>
 
 #ifndef _TYPES
 #define _TYPES
@@ -51,7 +51,7 @@ enum parameter_types { normal,
                        singleton } ;
 
 extern void strrpt( char *s, char c, int cnt ) ;
-extern void error(char *s) ;
+extern void error(const char *s) ;
 
 extern DylanObject *object_object ;
 extern DylanObject *symbol_object ;
@@ -82,5 +82,5 @@ extern DylanObject *class_object ;
 
 extern Environment *the_global_environment ;
 
-int TheDylanScope ;
+extern int TheDylanScope ;
 #endif

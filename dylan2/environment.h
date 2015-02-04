@@ -36,7 +36,7 @@ class Environment : public gc
        Environment() ;
        void SetPrevEnv(Environment *) ;
        Boolean SetBinding( Variable *, DylanObject * );
-       Boolean SetNewBinding( Variable *, DylanObject * );
+       void SetNewBinding( Variable *, DylanObject * );
        DylanObject *GetBinding( Variable * );
        List<Binding *> *GetBindings( ) { return Bindings ; }
        Environment *GetPrevEnv() { return PrevEnv ; }

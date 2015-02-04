@@ -11,6 +11,8 @@
 
 #include "environment.h"
 #include "variable.h"
+#include <string.h>
+
 /*
  +------------------------------------------------------------------
  | FUNCTION  : Binding::Binding
@@ -226,7 +228,7 @@ Boolean Environment::SetBinding( Variable *Var, DylanObject *Obj )
  | CHANGES   :
  +------------------------------------------------------------------
  */
-Boolean Environment::SetNewBinding( Variable *Var, DylanObject *Obj )
+void Environment::SetNewBinding( Variable *Var, DylanObject *Obj )
 {
    Bindings->AppendItem( new Binding( Var, Obj ) ) ;
 }

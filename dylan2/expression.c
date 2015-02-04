@@ -15,6 +15,7 @@
 #include "list_type.h"
 #include "boolean.h"
 #include "apply.h"
+#include <string.h>
 
 static Variable *PtrVar = NULL ;
 static Slot_specs *ClassSlot = NULL  ;
@@ -23,7 +24,7 @@ static int CollectionElement = -1 ;
 /*
  +------------------------------------------------------------------
  | FUNCTION  : Expression::FindMethod
- | INPUT     : char * :  een operand
+ | INPUT     : const char *  : een operand
  |             DylanObject * : een object
  |             DylanObject * : een object
  | OUTPUT    : -
@@ -37,7 +38,7 @@ static int CollectionElement = -1 ;
  | CHANGES   :
  +------------------------------------------------------------------
  */
-DylanObject *Expression::FindMethod( char *op, DylanObject *Object1, DylanObject *Object2, Environment *Env )
+DylanObject *Expression::FindMethod( const char *op, DylanObject *Object1, DylanObject *Object2, Environment *Env )
 {
    List<DylanObject *> *P ;
    List<Parameter *> *ParList ;
@@ -830,10 +831,10 @@ void Not::Print(int *indent)
  */
 DylanObject * Not::GetValue(Environment *Env)
 {
-   Boolean bool ;
+   Boolean boolean ;
 
-   operand->GetValue(Env)->Getter(&bool) ;
-   return ( new boolean_type( ! bool ) ) ;
+   operand->GetValue(Env)->Getter(&boolean) ;
+   return ( new boolean_type( ! boolean ) ) ;
 }
 
 /*
@@ -1259,7 +1260,7 @@ DylanObject *VectorRef::GetValue(Environment *Env )
  | CHANGES   :
  +------------------------------------------------------------------
  */
-Expression *MakeExpression ( char *op, Expression *E1, Expression *E2 )
+Expression *MakeExpression ( const char *op, Expression *E1, Expression *E2 )
 {
   if ( strcmp (op,  "*" ) == 0)
      return (new Mul( E1, E2)) ;

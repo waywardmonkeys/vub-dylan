@@ -17,13 +17,13 @@
 #include "environment.h"
 
 struct tempvar
-   { char *name;
+   { const char *name;
      Expression *type ; } ;
 
 class Variable : public Constituent
 {
     private :
-        char *Name ;
+        const char *Name ;
         int index ;
         Expression  *ClassVar ;
         Expression *Init ;
@@ -31,11 +31,11 @@ class Variable : public Constituent
         DylanObject *Value ;
         Boolean Initialized ;
     public :
-        Variable(char *a, int c, Expression *d, Expression *e, Boolean f) ;
-        Variable(char *a ) ;
-        Variable(char *a, Expression *d) ;
-        Variable( char *a, Boolean b ) ;
-        char *GetName() ;
+        Variable(const char *a, int c, Expression *d, Expression *e, Boolean f) ;
+        Variable(const char *a ) ;
+        Variable(const char *a, Expression *d) ;
+        Variable( const char *a, Boolean b ) ;
+        const char *GetName() ;
         Expression *GetType() ;
         Boolean IsConstant() ;
         void  SetVar( Expression *exp ) ; 

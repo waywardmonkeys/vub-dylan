@@ -24,7 +24,7 @@ class Environment ;
 class DylanObject : public gc
 {
    protected :
-     char         *id ;
+     const char   *id ;
      Boolean       Abstract ;
      Boolean       Sealed ;
      Boolean       Instantiable ;
@@ -39,7 +39,7 @@ class DylanObject : public gc
      /* constructor */
      DylanObject()  ;
 
-     char                *GetName();
+     const char          *GetName();
      DylanObject         *GetValue(Environment *);
      DylanObject        **GetDirectSuperclass(int *classes );
      DylanObject        **GetSuperclass(int *classes );
@@ -47,14 +47,14 @@ class DylanObject : public gc
 
      virtual void                 Print(int *) {;}
      virtual int                  operator==( const DylanObject *X)  { return FALSE ; }
-     virtual Slot_specs          *ReturnSlot(char *) {return NULL ;}
+     virtual Slot_specs          *ReturnSlot(const char *) {return NULL ;}
      virtual List<Slot_specs *>  *GetSlots() {return NULL ;}
      virtual int                  ReturnParaType() { return normal ; }
 
      /* setter functions */
      virtual void                 Setter(char ) {} 
      virtual void                 Setter(long ) {}
-     virtual void                 Setter(char *) {}
+     virtual void                 Setter(const char *) {}
      virtual void                 Setter(float) {}
      virtual void                 Setter(double) {} 
      virtual void                 Setter(int, DylanObject *) {} 
@@ -77,12 +77,12 @@ class DylanObject : public gc
      virtual Boolean              Empty() {return FALSE ;}
      virtual Boolean              IsAbstract() {return Abstract ;}
      virtual Boolean              IsInstantiable() { return Instantiable ; }
-     virtual DylanObject         *Instance( DylanObject *, List<DylanObject *> * ) {}
+     virtual DylanObject         *Instance( DylanObject *, List<DylanObject *> * ) { return NULL; }
      virtual List<DylanObject *> *GetDimensions() {return NULL ;}
      virtual void                 SetEnv(Environment *) {}
      virtual Environment         *GetEnv() {return NULL ;}
 } ;
 
-extern long MakeInteger( char *s ) ;
-extern double MakeReal( char *s ) ;
+extern long MakeInteger( const char *s ) ;
+extern double MakeReal( const char *s ) ;
 #endif

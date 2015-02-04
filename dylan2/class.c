@@ -218,7 +218,7 @@ void ClassDictionnary::InsertClass( DylanObject *C )
 /*
  +------------------------------------------------------------------
  | FUNCTION  : ClassDictionnary::SearchClass
- | INPUT     : char * : een klasse
+ | INPUT     : const char * : een klasse
  | OUTPUT    : -
  | RETURN    : TRUE : klasse gevonden !
  |             FALSE : klasse niet gevonden
@@ -231,7 +231,7 @@ void ClassDictionnary::InsertClass( DylanObject *C )
  | CHANGES   :
  +------------------------------------------------------------------
 */
-int ClassDictionnary::SearchClass( char *Name )
+int ClassDictionnary::SearchClass( const char *Name )
 {
     struct ClassList   *P ;
 

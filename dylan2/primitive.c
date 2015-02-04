@@ -13,6 +13,7 @@
  | CHANGES   :
  +------------------------------------------------------------------
 */
+#include <stdlib.h>
 #include <string.h>
 #include <math.h>
 #include "primitive.h"
@@ -581,7 +582,7 @@ DylanObject *number_atan2( number *n1, number *n2 )
 
 /*
  +------------------------------------------------------------------
- | FUNCTION  : and
+ | FUNCTION  : myand
  | INPUT     : boolean : een boolean waarde
  |             boolean : een boolean waarde
  | OUTPUT    : -
@@ -593,7 +594,7 @@ DylanObject *number_atan2( number *n1, number *n2 )
  | CHANGES   :
  +------------------------------------------------------------------
  */
-DylanObject *and( boolean_type *n1, boolean_type *n2 )
+DylanObject *myand( boolean_type *n1, boolean_type *n2 )
 {
    boolean_type *s1 ;
    int x ;
@@ -608,7 +609,7 @@ DylanObject *and( boolean_type *n1, boolean_type *n2 )
 
 /*
  +------------------------------------------------------------------
- | FUNCTION  : or
+ | FUNCTION  : myor
  | INPUT     : boolean : een boolean
  |             boolean : een boolean
  | OUTPUT    :
@@ -620,7 +621,7 @@ DylanObject *and( boolean_type *n1, boolean_type *n2 )
  | CHANGES   :
  +------------------------------------------------------------------
  */
-DylanObject *or( boolean_type *n1, boolean_type *n2 )
+DylanObject *myor( boolean_type *n1, boolean_type *n2 )
 {
    boolean_type *s1 ;
    int x ;
@@ -785,7 +786,7 @@ DylanObject *make2( DylanObject *n1, list *n2 )
 
 /*
  +------------------------------------------------------------------
- | FUNCTION  : instance
+ | FUNCTION  : myinstance
  | INPUT     : DylanObject : een bepaald object
  |             DylanObject : een type
  | OUTPUT    : -
@@ -799,7 +800,7 @@ DylanObject *make2( DylanObject *n1, list *n2 )
  | CHANGES   :
  +------------------------------------------------------------------
  */
-DylanObject *instance( DylanObject *n1, DylanObject *n2 )
+DylanObject *myinstance( DylanObject *n1, DylanObject *n2 )
 {
    char s[255] ;
    static boolean_type *result ;
@@ -1361,7 +1362,7 @@ DylanObject *myceil( real *n1 )
 }
 /*
  +------------------------------------------------------------------
- | FUNCTION  : round
+ | FUNCTION  : myround
  | INPUT     : real : een reeel getal
  | OUTPUT    : -
  | RETURN    : integer
@@ -1373,7 +1374,7 @@ DylanObject *myceil( real *n1 )
  | CHANGES   :
  +------------------------------------------------------------------
  */
-DylanObject *round( real *n1 )
+DylanObject *myround( real *n1 )
 {
    double l ;
    static integer *result ;
@@ -1469,7 +1470,7 @@ DylanObject *local_apply( function *f, list *lijst )
 /*
  +------------------------------------------------------------------
  | FUNCTION  : MakeMethod
- | INPUT     : char * : naam van de methode (Dylan syntax)
+ | INPUT     : const char * : naam van de methode (Dylan syntax)
  |             PRIM   : primitive (C naam)
  |             ...    : variabel aantal argumenten
  | OUTPUT    : -
@@ -1482,7 +1483,7 @@ DylanObject *local_apply( function *f, list *lijst )
  | CHANGES   :
  +------------------------------------------------------------------
  */
-void MakeMethod( char *MethodName, PRIM g , DylanObject *obj, ...)  
+void MakeMethod( const char *MethodName, PRIM g , DylanObject *obj, ...)  
 {
    List<Parameter *> *ParList ;
    va_list            args ;
@@ -1521,48 +1522,48 @@ void MakeMethod( char *MethodName, PRIM g , DylanObject *obj, ...)
  */
 void install_primitives()
 {
-   MakeMethod( "+", number_add, number_object, number_object, NULL ) ;
-   MakeMethod( "-", number_sub, number_object, number_object, NULL ) ;
-   MakeMethod( "*", number_mul, number_object, number_object, NULL ) ;
-   MakeMethod( "/", number_div, number_object, number_object, NULL ) ;
-   MakeMethod( "odd?", odd, integer_object, NULL ) ;
-   MakeMethod( "even?", even, integer_object, NULL ) ;
-   MakeMethod( "zero?", zero, real_object, NULL ) ;
-   MakeMethod( "positive?", positive, real_object, NULL ) ;
-   MakeMethod( "negative?", negative, real_object, NULL ) ;
-   MakeMethod( "sqrt", number_sqrt, number_object, NULL ) ;
-   MakeMethod( "atan2", number_atan2, number_object,number_object, NULL ) ;
-   MakeMethod( "print", dylan_print, object_object, NULL ) ;
-   MakeMethod( "=", string_eq, string_object,string_object, NULL ) ;
-   MakeMethod( "=", symbol_eq, symbol_object,symbol_object, NULL ) ;
-   MakeMethod( "=", number_eq, number_object,number_object, NULL ) ;
-   MakeMethod( ">", string_gt, string_object,string_object, NULL ) ;
-   MakeMethod( ">", number_gt, number_object,number_object, NULL ) ;
-   MakeMethod( "<", number_lt, number_object,number_object, NULL ) ;
-   MakeMethod( "<", string_lt, string_object,string_object, NULL ) ;
-   MakeMethod( ">=", number_ge, number_object,number_object, NULL ) ;
-   MakeMethod( "<=", number_le, number_object,number_object, NULL ) ;
-   MakeMethod( "~=", number_ne, number_object,number_object, NULL ) ;
-   MakeMethod( "==", identity, object_object,object_object, NULL ) ;
-   MakeMethod( "|", or, boolean_object,boolean_object, NULL ) ;
-   MakeMethod( "&", and, boolean_object,boolean_object, NULL ) ;
-   MakeMethod( "make", make, symbol_object, NULL ) ;
-   MakeMethod( "make", make2, symbol_object, rest_list_object, NULL ) ;
-   MakeMethod( "instance?", instance, object_object, object_object, NULL ) ;
-   MakeMethod( "slot-initialized?", slot_initialized, object_object, symbol_object,  NULL ) ;
-   MakeMethod( "subtype?", sub_type, object_object, object_object,  NULL ) ;
-   MakeMethod( "object-class", object_class, object_object,  NULL ) ;
-   MakeMethod( "size", size, collection_object,  NULL ) ;
-   MakeMethod( "empty?", empty, collection_object,  NULL ) ;
-   MakeMethod( "class-for-copy", class_for_copy, mutable_sequence_object,  NULL ) ;
-   MakeMethod( "list", make_list, rest_list_object,  NULL ) ;
-   MakeMethod( "values", values, rest_list_object,  NULL ) ;
-   MakeMethod( "write", write, rest_list_object,  NULL ) ;
-   MakeMethod( "floor", myfloor, real_object,  NULL ) ;
-   MakeMethod( "ceil", myceil, real_object,  NULL ) ;
-   MakeMethod( "round", round, real_object,  NULL ) ;
-   MakeMethod( "as-uppercase", as_uppercase, character_object,  NULL ) ;
-   MakeMethod( "as-lowercase", as_lowercase, character_object,  NULL ) ;
-   MakeMethod( "%apply", local_apply, function_object, list_object,  NULL ) ;
-   MakeMethod( "random", local_random, integer_object, NULL ) ;
+   MakeMethod( "+", (PRIM)number_add, number_object, number_object, NULL ) ;
+   MakeMethod( "-", (PRIM)number_sub, number_object, number_object, NULL ) ;
+   MakeMethod( "*", (PRIM)number_mul, number_object, number_object, NULL ) ;
+   MakeMethod( "/", (PRIM)number_div, number_object, number_object, NULL ) ;
+   MakeMethod( "odd?", (PRIM)odd, integer_object, NULL ) ;
+   MakeMethod( "even?", (PRIM)even, integer_object, NULL ) ;
+   MakeMethod( "zero?", (PRIM)zero, real_object, NULL ) ;
+   MakeMethod( "positive?", (PRIM)positive, real_object, NULL ) ;
+   MakeMethod( "negative?", (PRIM)negative, real_object, NULL ) ;
+   MakeMethod( "sqrt", (PRIM)number_sqrt, number_object, NULL ) ;
+   MakeMethod( "atan2", (PRIM)number_atan2, number_object,number_object, NULL ) ;
+   MakeMethod( "print", (PRIM)dylan_print, object_object, NULL ) ;
+   MakeMethod( "=", (PRIM)string_eq, string_object,string_object, NULL ) ;
+   MakeMethod( "=", (PRIM)symbol_eq, symbol_object,symbol_object, NULL ) ;
+   MakeMethod( "=", (PRIM)number_eq, number_object,number_object, NULL ) ;
+   MakeMethod( ">", (PRIM)string_gt, string_object,string_object, NULL ) ;
+   MakeMethod( ">", (PRIM)number_gt, number_object,number_object, NULL ) ;
+   MakeMethod( "<", (PRIM)number_lt, number_object,number_object, NULL ) ;
+   MakeMethod( "<", (PRIM)string_lt, string_object,string_object, NULL ) ;
+   MakeMethod( ">=", (PRIM)number_ge, number_object,number_object, NULL ) ;
+   MakeMethod( "<=", (PRIM)number_le, number_object,number_object, NULL ) ;
+   MakeMethod( "~=", (PRIM)number_ne, number_object,number_object, NULL ) ;
+   MakeMethod( "==", (PRIM)identity, object_object,object_object, NULL ) ;
+   MakeMethod( "|", (PRIM)myor, boolean_object,boolean_object, NULL ) ;
+   MakeMethod( "&", (PRIM)myand, boolean_object,boolean_object, NULL ) ;
+   MakeMethod( "make", (PRIM)make, symbol_object, NULL ) ;
+   MakeMethod( "make", (PRIM)make2, symbol_object, rest_list_object, NULL ) ;
+   MakeMethod( "instance?", (PRIM)myinstance, object_object, object_object, NULL ) ;
+   MakeMethod( "slot-initialized?", (PRIM)slot_initialized, object_object, symbol_object,  NULL ) ;
+   MakeMethod( "subtype?", (PRIM)sub_type, object_object, object_object,  NULL ) ;
+   MakeMethod( "object-class", (PRIM)object_class, object_object,  NULL ) ;
+   MakeMethod( "size", (PRIM)size, collection_object,  NULL ) ;
+   MakeMethod( "empty?", (PRIM)empty, collection_object,  NULL ) ;
+   MakeMethod( "class-for-copy", (PRIM)class_for_copy, mutable_sequence_object,  NULL ) ;
+   MakeMethod( "list", (PRIM)make_list, rest_list_object,  NULL ) ;
+   MakeMethod( "values", (PRIM)values, rest_list_object,  NULL ) ;
+   MakeMethod( "write", (PRIM)write, rest_list_object,  NULL ) ;
+   MakeMethod( "floor", (PRIM)myfloor, real_object,  NULL ) ;
+   MakeMethod( "ceil", (PRIM)myceil, real_object,  NULL ) ;
+   MakeMethod( "round", (PRIM)myround, real_object,  NULL ) ;
+   MakeMethod( "as-uppercase", (PRIM)as_uppercase, character_object,  NULL ) ;
+   MakeMethod( "as-lowercase", (PRIM)as_lowercase, character_object,  NULL ) ;
+   MakeMethod( "%apply", (PRIM)local_apply, function_object, list_object,  NULL ) ;
+   MakeMethod( "random", (PRIM)local_random, integer_object, NULL ) ;
 }

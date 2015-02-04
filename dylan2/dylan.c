@@ -87,13 +87,15 @@ int yywrap()
  | CHANGES   :
  +------------------------------------------------------------------
  */
-void error( char *s )
+void error( const char *s )
 {
    fprintf( stderr, "error : %s\n", s ) ;
    exit(-1) ;
 }
 
-main(int argc, char *argv[])
+int TheDylanScope = -1;
+
+int main(int argc, char *argv[])
 {
   int i = 0 ;
   DylanObject *Result ;
@@ -150,8 +152,6 @@ main(int argc, char *argv[])
      MyProgram->Print(&i) ;
   }
 
-  TheDylanScope = -1 ;
-
   Result = MyProgram->GetValue(the_global_environment) ;
   if ( Result != NULL ) 
   {
@@ -163,4 +163,5 @@ main(int argc, char *argv[])
   }
   printf( "\n\n=============== EINDE ======================\n" ) ;
 
+  return 0;
 }

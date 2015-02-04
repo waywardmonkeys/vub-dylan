@@ -1,4 +1,5 @@
 #include "keyword.h"
+#include <string.h>
 
 /*
  +------------------------------------------------------------------
@@ -29,7 +30,7 @@ keyword::keyword()
 /*
  +------------------------------------------------------------------
  | FUNCTION  : keyword::keyword
- | INPUT     : char        : naam van het keyword
+ | INPUT     : const char  : naam van het keyword
  |             DylanObject : waarde van het keyword
  | OUTPUT    : -
  | RETURN    : een keyword
@@ -40,7 +41,7 @@ keyword::keyword()
  | CHANGES   :
  +------------------------------------------------------------------
  */
-keyword::keyword( char *s, DylanObject *o)
+keyword::keyword( const char *s, DylanObject *o)
 { 
    name = s ;
    value = o ;

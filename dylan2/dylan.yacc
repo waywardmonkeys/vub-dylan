@@ -33,6 +33,9 @@
    ClassDictionnary ClassDict ;
    DataDictionnary  VarDict ;
 
+   void yyerror(const char *);
+   int yylex(void);
+
 %}
 
 %union { struct Token_Struct *token ;
@@ -1144,7 +1147,7 @@ exception : EXCEPTION body
 
 #include "lex.yy.c"
 
-void yyerror(char *s)
+void yyerror(const char *s)
 {
    fprintf( stderr, "%s : %s in line %d \n", s, yytext, linecount ) ;
    exit(-1) ;

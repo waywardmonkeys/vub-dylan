@@ -19,6 +19,9 @@
 */
 #ifndef _LIST
 #define _LIST
+
+#include <stdio.h>
+
 template <class T>
 class List : public gc
 {

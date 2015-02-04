@@ -1,5 +1,6 @@
 #include "apply.h"
 #include "list_type.h"
+#include <string.h>
 
 /*
  +------------------------------------------------------------------

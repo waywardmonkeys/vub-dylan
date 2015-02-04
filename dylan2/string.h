@@ -1,5 +1,7 @@
 #ifndef _STRING
 #define _STRING
+
+#include <string.h>
 #include "mutable_sequence.h"
 
 class string : public mutable_sequence
@@ -8,9 +10,9 @@ class string : public mutable_sequence
       char *s ;
    public :
      string() ; 
-     string(char *str) ; 
+     string(const char *str) ; 
      string(int *, List<DylanObject *> *) ; 
-     void Setter(char *str) ;
+     void Setter(const char *str) ;
      void Getter(char *str) ;
      DylanObject *GetElement( int i) ;
      void Print(int *) ;  

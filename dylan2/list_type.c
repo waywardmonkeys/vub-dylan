@@ -1,5 +1,6 @@
 #include "list_type.h"
 #include "keyword.h"
+#include <string.h>
 
 /*
  +------------------------------------------------------------------

@@ -16,7 +16,7 @@
 /*
  +------------------------------------------------------------------
  | FUNCTION  : MakeInteger
- | INPUT     : char : een string met een integer
+ | INPUT     : const char : een string met een integer
  | OUTPUT    : -
  | RETURN    : een integer (long)
  | DATE      : 10/12/1994
@@ -28,7 +28,7 @@
  | CHANGES   :
  +------------------------------------------------------------------
  */
-long MakeInteger( char *s )
+long MakeInteger( const char *s )
 {
    long AnInt ;
    int i ;
@@ -62,7 +62,7 @@ long MakeInteger( char *s )
 /*
  +------------------------------------------------------------------
  | FUNCTION  : MakeReal
- | INPUT     : char : een real string
+ | INPUT     : const char : een real string
  | OUTPUT    : -
  | RETURN    : een floating point getal
  | DATE      :
@@ -74,7 +74,7 @@ long MakeInteger( char *s )
  | CHANGES   :
  +------------------------------------------------------------------
  */
-double MakeReal( char *s )
+double MakeReal( const char *s )
 {
    double AReal ;
 
@@ -171,7 +171,7 @@ DylanObject::DylanObject()
  | CHANGES   :
  +------------------------------------------------------------------
  */
-char *DylanObject::GetName()
+const char *DylanObject::GetName()
 {
    return id ;
 }

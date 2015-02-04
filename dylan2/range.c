@@ -1,5 +1,6 @@
 #include "range.h"
 #include "keyword.h"
+#include <string.h>
 
 /*
  +------------------------------------------------------------------

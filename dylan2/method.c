@@ -29,7 +29,7 @@ MethodDictionnary MethodDict ; // globale method dictionnary
  | CHANGES   :
  +------------------------------------------------------------------
  */
-char *Method::GetName() 
+const char *Method::GetName() 
 { 
    return Name ;
 }
@@ -157,7 +157,7 @@ int Method::operator < ( Method &M1)
     int  Size ;
 
     P1 = M1.GetParameters() ;
-    P2 = this.GetParameters() ;
+    P2 = this->GetParameters() ;
 
     for( i = 1; P1 != NULL && i <= P1->GetSize() ; i++ )
     {
@@ -308,7 +308,7 @@ Boolean Method::CheckTypes( List<DylanObject *> *Objects,
          char s[255] ;
          DylanObject *o2 ;
          int length ;
-         char  *k ;
+         const char  *k ;
 
          k = Parameters->GetItem()->GetKeyword() ;
          length = strlen(k) - 1 ;
@@ -485,6 +485,7 @@ Method *MethodDictionnary::GetMethod()
 MethodDictionnary::MethodDictionnary()
 {
    SymbolList = new MethodDict ;
+   memset(SymbolList, 0, sizeof(MethodDict));
    SymbolList->next = NULL ;
    SymbolList->Meth = NULL ;
    TopOfList  = SymbolList ;
@@ -555,15 +556,15 @@ void MethodDictionnary::InsertMethod( Method *M, int AScope)
  | CHANGES   :
  +------------------------------------------------------------------
  */
-int SortMethod( Method **M1, Method **M2 )
+int SortMethod( const void *M1, const void *M2 )
 {
-   return ((Method) **M1 < (Method ) **M2) ;
+   return (**(Method**)M1 < **(Method **)M2) ;
 }
 
 /*
  +------------------------------------------------------------------
  | FUNCTION  : MethodDictionnary::SearchMethod
- | INPUT     : char * : naam van de methode
+ | INPUT     : const char * : naam van de methode
  |           : List<DylanObject *> : input waarden
  | OUTPUT    : List<DylanObject *> : rest waarden
  |             List<DylanObject *> : keywords
@@ -581,7 +582,7 @@ int SortMethod( Method **M1, Method **M2 )
  | CHANGES   :
  +------------------------------------------------------------------
  */
-Boolean MethodDictionnary::SearchMethod( char *Name, 
+Boolean MethodDictionnary::SearchMethod( const char *Name, 
                                          List<DylanObject *> *Objects,
                                          List<DylanObject *> *RestList,
                                          List<DylanObject *> *KeysList,
@@ -627,7 +628,7 @@ Boolean MethodDictionnary::SearchMethod( char *Name,
    *MethodIndex   = 0 ;
    if ( *MethodsToSort > 0 )
    {
-      qsort(SortArray, *MethodsToSort, sizeof(Method *) , SortMethod ) ;
+      qsort((void*)SortArray, *MethodsToSort, sizeof(Method *) , SortMethod ) ;
 
       return TRUE ;
    }

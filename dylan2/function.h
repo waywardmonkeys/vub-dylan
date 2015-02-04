@@ -4,17 +4,17 @@
 class function : public DylanObject
 {
    private:
-      char *fct ;
+      const char *fct ;
       Method *fct_body ; 
       Environment *Env ;
       PRIM primitive ;
    public :
      function( ) ;
-     function( char *s ) ;
+     function( const char *s ) ;
      function( Method *B ) ;
      function( DylanObject *p ) ;
 
-     void         Setter(char *s) ;
+     void         Setter(const char *s) ;
      void         Getter(char *s) ;
      Method      *GetBody() ;
      void         Print(int *) ;

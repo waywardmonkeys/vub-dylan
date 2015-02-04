@@ -24,7 +24,9 @@ class Expression : public Constituent
     private :
 
     public :
-     DylanObject *FindMethod( char *op, DylanObject *Object1, DylanObject *Object2, Environment * ) ;
+     virtual ~Expression() {} ;
+
+     DylanObject *FindMethod( const char *op, DylanObject *Object1, DylanObject *Object2, Environment * ) ;
      virtual void Print(int * ) = 0  ;
      virtual DylanObject * GetValue(Environment *) = 0 ;
      void ReEval(Environment *) {} ;
@@ -150,9 +152,9 @@ class ClassRef : public Expression
 {
    private :
        Expression *LeftDot ;
-       char *Name ;
+       const char *Name ;
    public :
-      ClassRef ( Expression *E , char *s )
+      ClassRef ( Expression *E , const char *s )
           { LeftDot = E ; Name = s ; }
       void Print(int *) ;
       DylanObject * GetValue(Environment *) ;
@@ -163,10 +165,10 @@ class Argument
 {
   private :
      Expression *E ;
-     char       *Keyword ;
+     const char *Keyword ;
   public :
      Argument( Expression *Exp ) { E =Exp ; Keyword = NULL ; }
-     Argument( Expression *Exp, char *s ) { E =Exp ; Keyword = s ; }
+     Argument( Expression *Exp, const char *s ) { E =Exp ; Keyword = s ; }
      void Print(int *) ;
      DylanObject * GetValue(Environment *) ;
      Expression *GetExpression() { return E ; }
@@ -300,6 +302,6 @@ class Identity : public Conditional
        DylanObject * GetValue(Environment *) ;
 
 } ;
-extern Expression *MakeExpression ( char *op, Expression *E1, Expression *E2 ) ;
+extern Expression *MakeExpression ( const char *op, Expression *E1, Expression *E2 ) ;
 extern ClassDictionnary ClassDict ;
 #endif

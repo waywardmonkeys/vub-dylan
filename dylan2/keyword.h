@@ -5,12 +5,12 @@
 class keyword : public DylanObject 
 {
     private :
-        char *name ;
+        const char *name ;
         DylanObject *value ;
     public:
         /* constructors */
         keyword() ;
-        keyword( char *s, DylanObject *o)  ;
+        keyword( const char *s, DylanObject *o)  ;
 
 
         int operator== (const DylanObject *X) ;

@@ -1,5 +1,6 @@
 #include "function.h"
 #include "method.h"
+#include <string.h>
 
 /*
  +------------------------------------------------------------------
@@ -29,7 +30,7 @@ function::function( )
 /*
  +------------------------------------------------------------------
  | FUNCTION  : function::function
- | INPUT     : char * : naam van de functie
+ | INPUT     : const char * : naam van de functie
  | OUTPUT    : -
  | RETURN    : een functie object
  | DATE      :
@@ -40,7 +41,7 @@ function::function( )
  | CHANGES   :
  +------------------------------------------------------------------
  */
-function::function( char *s ) 
+function::function( const char *s ) 
 { 
    id = "<function>";
    fct = s ;
@@ -82,7 +83,7 @@ function::function( Method *B )
 /*
  +------------------------------------------------------------------
  | FUNCTION  : function::Setter
- | INPUT     : char *   : naam van de functie
+ | INPUT     : const char *   : naam van de functie
  | OUTPUT    : -
  | RETURN    : -
  | DATE      :
@@ -92,7 +93,7 @@ function::function( Method *B )
  | CHANGES   :
  +------------------------------------------------------------------
  */
-void function::Setter(char *s) 
+void function::Setter(const char *s) 
 { 
    fct = s ; 
 }
