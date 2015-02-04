@@ -1,0 +1,2 @@
+^rrrrrr ;
+object-class( ^rrrrr ) ;
